@@ -58,6 +58,14 @@
 #define LOG_ALLOC(...)
 //#define LOG_ALLOC(...) ALOG(LOG_DEBUG, LOG_TAG, __VA_ARGS__)
 
+// XMSX
+// Supress warnings caused by converting from uint to void* in pCmd->TextureID
+#ifdef __clang__
+#pragma clang diagnostic ignored "-Wint-to-void-pointer-cast" // warning : cast to 'void *' from smaller integer type 'int' //
+#elif defined(__GNUC__)
+#pragma GCC diagnostic ignored "-Wint-to-pointer-cast"      // warning: cast to pointer from integer of different size
+#endif
+
 // ---------------------------------------------------------------------------
 
 // This macro should never be used at runtime, as a too large value
